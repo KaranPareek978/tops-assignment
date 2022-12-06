@@ -1,9 +1,9 @@
 #include<stdio.h>
-#include<conio.h>
+#include<math.h>
 
 int main ()
 {
-float area , l,b,radius;
+float area , l,b,radius, a,d,c,s;
 int ch;
 printf("1 area of circle \n 2 area of r1ectangle\n");
 scanf("%d",&ch);
@@ -24,6 +24,16 @@ switch (ch)
       area = l*b;
       printf("result :-> %f",area);
        break;
+      }
+      case 3:
+      {
+         printf("Enter the value of side");
+         scanf("%f %f %f", &a,&d,&c);
+         s = a+b+c;
+         s = (a+d+c)/2;
+         area = sqrt(s*(s-a)*(s-d)*(s-c));
+         printf("result = %f",area);
+         break;
       }
    {
          default:
