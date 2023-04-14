@@ -2,83 +2,103 @@
 #include <string>
 #include <vector>
 
-struct Student
+using namespace std;
+
+class Lecture
 {
-    std::string name;
-    int rollNumber;
-    std::vector<std::string> lectures;
-    double grade;
+public:
+    string subject;
+    string lecturer;
+    int day;
+    int time;
+
+    Lecture(string subject, string lecturer, int day, int time)
+    {
+        this->subject = subject;
+        this->lecturer = lecturer;
+        this->day = day;
+        this->time = time;
+    }
 };
 
-std::vector<Student> students; 
-
-void addStudent()
+class LectureManager
 {
-    Student s;
-    std::cout &#8203;
-    oaicite: { "index" : 0, "invalid_reason" : "Malformed citation << \"Enter student name: \";\n  std::cin >>" }
-    &#8203;
-    s.name;
-    std::cout &#8203;
-    oaicite: { "index" : 1, "invalid_reason" : "Malformed citation << \"Enter student roll number: \";\n  std::cin >>" }
-    &#8203;
-    s.rollNumber;
-    students.push_back(s);
-    std::cout << "Student added successfully!" << std::endl;
-}
+private:
+    vector<Lecture> lectures;
 
-void viewStudent()
-{
-    int rollNumber;
-    std::cout &#8203;
-    oaicite: { "index" : 2, "invalid_reason" : "Malformed citation << \"Enter student roll number: \";\n  std::cin >>" }
-    &#8203;
-    rollNumber;
-    for (const Student &s : students)
+public:
+    void addLecture(Lecture lecture)
     {
-        if (s.rollNumber == rollNumber)
+        lectures.push_back(lecture);
+        cout << "Lecture added successfully." << endl;
+    }
+
+    void listLectures()
+    {
+        if (lectures.size() == 0)
         {
-            std::cout << "Name: " << s.name << std::endl;
-            std::cout << "Roll Number: " << s.rollNumber << std::endl;
-            std::cout << "Lectures: ";
-            for (const std::string &lecture : s.lectures)
+            cout << "No lectures found." << endl;
+        }
+        else
+        {
+            cout << "Lecture List:" << endl;
+            for (int i = 0; i < lectures.size(); i++)
             {
-                std::cout << lecture << " ";
+                Lecture lecture = lectures[i];
+                cout << "Subject: " << lecture.subject << endl;
+                cout << "Lecturer: " << lecture.lecturer << endl;
+                cout << "Day: " << lecture.day << endl;
+                cout << "Time: " << lecture.time << endl;
+                cout << "---------------------------" << endl;
             }
-            std::cout << std::endl;
-            std::cout << "Grade: " << s.grade << std::endl;
-            return;
         }
     }
-    std::cout << "Student not found." << std::endl;
-}
+
+    void searchLectures(string keyword)
+    {
+        vector<Lecture> results;
+        for (int i = 0; i < lectures.size(); i++)
+        {
+            Lecture lecture = lectures[i];
+            if (lecture.subject.find(keyword) != string::npos || lecture.lecturer.find(keyword) != string::npos)
+            {
+                results.push_back(lecture);
+            }
+        }
+
+        if (results.size() == 0)
+        {
+            cout << "No lectures found." << endl;
+        }
+        else
+        {
+            cout << "Search Results:" << endl;
+            for (int i = 0; i < results.size(); i++)
+            {
+                Lecture lecture = results[i];
+                cout << "Subject: " << lecture.subject << endl;
+                cout << "Lecturer: " << lecture.lecturer << endl;
+                cout << "Day: " << lecture.day << endl;
+                cout << "Time: " << lecture.time << endl;
+                cout << "---------------------------" << endl;
+            }
+        }
+    }
+};
 
 int main()
 {
-    while (true)
-    {
-        std::cout << "1. Add Student" << std::endl;
-        std::cout << "2. View Student" << std::endl;
-        std::cout << "3. Exit" << std::endl;
-        int option;
-        std::cout &#8203;
-        oaicite: { "index" : 3, "invalid_reason" : "Malformed citation << \"Enter option: \";\n    std::cin >>" }
-        &#8203;
-        option;
-        switch (option)
-        {
-        case 1:
-            addStudent();
-            break;
-        case 2:
-            viewStudent();
-            break;
-        case 3:
-            return 0;
-        default:
-            std::cout << "Invalid option." << std::endl;
-            break;
-        }
-    }
+    LectureManager manager;
+
+    // Add lectures
+    manager.addLecture(Lecture("Math", "Karan Pareek", 1, 9));
+    manager.addLecture(Lecture("Physics", "Pawan Pareek", 2, 11));
+
+    // List all lectures
+    manager.listLectures();
+
+    // Search for lectures
+    manager.searchLectures("Karan");
+
     return 0;
 }
